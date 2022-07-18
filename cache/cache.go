@@ -1,6 +1,9 @@
 package cache
 
-import "github.com/go-njn/gonjn010/internal"
+import (
+	"github.com/go-njn/gonjn010/internal"
+	"time"
+)
 
 type Cache interface {
 	Set(key string, value any) error
@@ -12,6 +15,6 @@ func Version() string {
 	return internal.Version
 }
 
-func NewCache() Cache {
-	return nil
+func NewCache(lifeTime ...time.Duration) Cache {
+	return internal.NewCache(lifeTime...)
 }
