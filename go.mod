@@ -1,3 +1,3 @@
-module github.com/go-njn/gonjn010/cache
+module cache
 
 go 1.18

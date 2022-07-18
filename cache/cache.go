@@ -1,6 +1,6 @@
 package cache
 
-import "github.com/go-njn/gonjn010/cache/internal"
+import "cache/internal"
 
 type Cache interface {
 	Set(key string, value any) error
