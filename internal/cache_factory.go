@@ -1,11 +1,10 @@
 package internal
 
 import (
-	"github.com/go-njn/gonjn010/cache"
 	"time"
 )
 
-func NewCache(defaultItemLifeTime ...time.Duration) cache.Cache {
+func NewCache(defaultItemLifeTime ...time.Duration) *cacheImpl {
 	lifeTime := defaultLifeTime
 	if len(defaultItemLifeTime) > 0 {
 		lifeTime = defaultItemLifeTime[0]
