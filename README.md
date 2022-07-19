@@ -84,6 +84,6 @@ func main() {
 ```text
 42
 key not found
-v0.0.9  
+v1.0.1  
 ```
 ___
