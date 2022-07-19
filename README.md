@@ -11,7 +11,9 @@ Get(key string) (any, error)
 Delete(key string) error
 }
 ```
-
+```shell
+go get -u -v  github.com/go-njn/gonjn010
+```
 ___
 
 # example 1
