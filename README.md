@@ -17,7 +17,7 @@ go get -u -v  github.com/go-njn/gonjn010
 ___
 
 # example 1
-
+[play](https://goplay.space/#2xH2YJBUk_B "goplay.space")
 ```go
 package main
 
@@ -48,7 +48,7 @@ func main() {
 ___
 
 # example 2
-
+[play](https://goplay.space/#rEktjm84o99 "goplay.space")
 ```go
 package main
 
