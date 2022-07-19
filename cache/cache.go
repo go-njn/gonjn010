@@ -15,6 +15,6 @@ func Version() string {
 	return internal.Version
 }
 
-func NewCache(lifeTime ...time.Duration) Cache {
-	return internal.NewCache(lifeTime...)
+func New(lifeTime ...time.Duration) Cache {
+	return internal.New(lifeTime...)
 }

@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-func NewCache(defaultItemLifeTime ...time.Duration) *cacheImpl {
+func New(defaultItemLifeTime ...time.Duration) *cacheImpl {
 	lifeTime := defaultLifeTime
 	if len(defaultItemLifeTime) > 0 {
 		lifeTime = defaultItemLifeTime[0]
