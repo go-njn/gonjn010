@@ -6,9 +6,9 @@ In-memory cache implementation, Go package
 
 ```go
 type Cache interface {
-    Set(key string, value any) error
-    Get(key string) (any, error)
-    Delete(key string) error
+Set(key string, value any) error
+Get(key string) (any, error)
+Delete(key string) error
 }
 ```
 ```shell
@@ -48,14 +48,15 @@ func main() {
 ___
 
 # example 2
-[play](https://goplay.space/#rEktjm84o99 "goplay.space")
+[play](https://goplay.space/#W9Wccxu89Hj "goplay.space")
 ```go
 package main
 
 import (
 	"fmt"
-	memcache "github.com/go-njn/gonjn010/cache"
 	"time"
+
+	memcache "github.com/go-njn/gonjn010/cache"
 )
 
 func main() {
@@ -65,13 +66,26 @@ func main() {
 		fmt.Println(err)
 	}
 
-	if userId, err := cache.Get("userId"); err != nil {
+	cache = memcache.New(3 * time.Minute)
+
+	if err := cache.Set("userId", 42); err != nil {
 		fmt.Println(err)
-	} else {
-		fmt.Println(userId)
 	}
 
-	cache.Delete("userId")
+	if value, err := cache.Get("userId"); err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println(value)
+	}
+
+	if err := cache.Delete("xxx-userId-xxx"); err != nil {
+		fmt.Println(err)
+	}
+
+	if err := cache.Delete("userId"); err != nil {
+		fmt.Println(err)
+	}
+
 	if userId, err := cache.Get("userId"); err != nil {
 		fmt.Println(err)
 	} else {
@@ -82,8 +96,10 @@ func main() {
 }
 ```
 ```text
+life time "15:00" is too high, max = "05:00"
 42
-key not found
-v1.0.1  
+key not found, key = "xxx-userId-xxx"
+key not found, key = "userId"
+v1.1.0
 ```
 ___
