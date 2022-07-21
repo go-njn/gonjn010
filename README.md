@@ -6,9 +6,9 @@ In-memory cache implementation, Go package
 
 ```go
 type Cache interface {
-Set(key string, value any) error
-Get(key string) (any, error)
-Delete(key string) error
+	Set(key string, value any) error
+	Get(key string) (any, error)
+	Delete(key string) error
 }
 ```
 ```shell
