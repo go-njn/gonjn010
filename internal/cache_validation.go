@@ -38,7 +38,7 @@ func validateItemLifeTime(ttl time.Duration) error {
 			formatDuration(maxTTL, format))
 	}
 
-	return errors.New(valueIsEmptyErrText)
+	return nil
 }
 
 func getKeyNotFoundError(key string) error {
