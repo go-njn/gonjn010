@@ -8,7 +8,7 @@ const (
 	valueIsEmptyErrText    = "value is empty"
 	itemExpiredErrTemplate = "item expired, key = %q"
 	ttlTooShortErrTemplate = "life %q time is too short, min = %q"
-	ttlTooHighErrTemplate
+	ttlTooHighErrTemplate  = "life time %q is too high, max = %q"
 )
 
 const (
