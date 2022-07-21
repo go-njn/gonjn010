@@ -5,11 +5,7 @@ import (
 	"time"
 )
 
-type Cache interface {
-	Set(key string, value any) error
-	Get(key string) (any, error)
-	Delete(key string) error
-}
+type Cache internal.Cache
 
 func Version() string {
 	return internal.Version

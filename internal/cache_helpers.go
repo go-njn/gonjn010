@@ -3,8 +3,12 @@ package internal
 import "time"
 
 const (
-	keyNotFoundErrText = "key not found"
-	itemExpiredErrText = "item expired"
+	keyIsEmptyErrText      = "key is empty"
+	keyNotFoundErrTemplate = "key not found, key = %q"
+	valueIsEmptyErrText    = "value is empty"
+	itemExpiredErrTemplate = "item expired, key = %q"
+	ttlTooShortErrTemplate = "life %q time is too short, min = %q"
+	ttlTooHighErrTemplate
 )
 
 const (
