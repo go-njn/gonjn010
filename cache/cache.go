@@ -5,12 +5,10 @@ import (
 	"time"
 )
 
-type Cache internal.Cache
-
 func Version() string {
 	return internal.Version
 }
 
-func New(lifeTime ...time.Duration) Cache {
+func New(lifeTime ...time.Duration) *internal.Cache {
 	return internal.New(lifeTime...)
 }

@@ -5,19 +5,13 @@ import (
 	"time"
 )
 
-type Cache interface {
-	Set(key string, value any) error
-	Get(key string) (any, error)
-	Delete(key string) error
-}
-
-type cacheImpl struct {
+type Cache struct {
 	sync     sync.RWMutex
 	lifeTime time.Duration
 	storage  map[string]cacheItem
 }
 
-func (c *cacheImpl) set(key string, value any, lifeTime time.Duration) error {
+func (c *Cache) set(key string, value any, lifeTime time.Duration) error {
 	if err := validateKey(key); err != nil {
 		return err
 	}
@@ -41,11 +35,11 @@ func (c *cacheImpl) set(key string, value any, lifeTime time.Duration) error {
 	return nil
 }
 
-func (c *cacheImpl) Set(key string, value any) error {
+func (c *Cache) Set(key string, value any) error {
 	return c.set(key, value, c.lifeTime)
 }
 
-func (c *cacheImpl) Get(key string) (any, error) {
+func (c *Cache) Get(key string) (any, error) {
 	if err := validateKey(key); err != nil {
 		return nil, err
 	}
@@ -65,7 +59,7 @@ func (c *cacheImpl) Get(key string) (any, error) {
 	return item.value, nil
 }
 
-func (c *cacheImpl) Delete(key string) error {
+func (c *Cache) Delete(key string) error {
 	if err := validateKey(key); err != nil {
 		return err
 	}
