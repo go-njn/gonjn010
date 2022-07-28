@@ -4,12 +4,92 @@ ___
 
 In-memory cache implementation, Go package
 
+# V2 with time-to-live for value item
+```shell
+go get -u -v  github.com/go-njn/gonjn010/v2
+```
 ```go
-type Cache interface {
-	Set(key string, value any) error
-	Get(key string) (any, error)
-	Delete(key string) error
+...
+  Set(key string, value any, ttl time.Duration)
+  Get(key string) (any, error)
+  Delete(key string) error
+...
+```
+```go
+package main
+
+import (
+	cacheV1 "github.com/go-njn/gonjn010/cache"
+	cacheV2 "github.com/go-njn/gonjn010/v2/pkg/cache"
+	"time"
+)
+
+func main() {
+	println("v1 version:", cacheV1.Version())
+	v1 := cacheV1.New()
+	v1.Set("user1", 42)
+
+	println("v2 version:", cacheV2.Version())
+	v2 := cacheV2.New()
+	v2.Set("user1 v2", 42, 5 * time.Second)
+	item, err := v2.Get("user1 v2")
+	if err != nil {
+		println("error: ", err.Error())
+	} else {
+		println("got item: ", item.(int))
+	}
+
+	println("\nitem expiration test")
+	println("waiting 6 sec, item must expire...")
+	time.Sleep(6 * time.Second)
+	item, err = v2.Get("user1 v2")
+	if err != nil {
+		println("error: ", err.Error())
+	} else {
+		println("got item: ", item.(int))
+	}
+
+	println("\ndelete item test")
+	v2.Set("user2 v2", 43, 5*time.Second)
+	item, err = v2.Get("user2 v2")
+	if err != nil {
+		println("error: ", err.Error())
+	} else {
+		println("got item: ", item.(int))
+	}
+
+	println("removing...")
+	v2.Delete("user2 v2")
+	item, err = v2.Get("user2 v2")
+	if err != nil {
+		println("error: ", err.Error())
+	} else {
+		println("got item: ", item.(int))
+	}
+
 }
+```
+```text
+v1 version: v1.1.1
+v2 version: v2.0.0
+got item:  42
+
+item expiration test
+waiting 6 sec, item must expire...
+error:  item expired, key = "user1 v2" 
+
+delete item test
+got item:  43
+removing...
+error:  key not found, key = "user2 v2"
+```
+___
+# V1 preliminary implementation
+
+```go
+  Set(key string, value any) error
+  Get(key string) (any, error)
+  Delete(key string) error
 ```
 ```shell
 go get -u -v  github.com/go-njn/gonjn010
